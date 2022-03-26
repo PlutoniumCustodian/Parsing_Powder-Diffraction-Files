@@ -7,7 +7,9 @@ import os
 #%%
 f_name = (os.listdir('File_To_Parse'))#list of files in "file_To-Parse"
 f_howmany = range(len(f_name))
-print(f_name)
+
+# print("List of files")
+print(pd.DataFrame(f_name, columns=['File Name']))
 
 #Reads each sheet from the files into dictionary with each sheet becomes a df
 # for x in f_howmany:
@@ -55,5 +57,6 @@ for x in range(len(key_list)):
                                 'Formula' : PDF_Formula, 'Crystal System' : PDF_System,
                                   'Referance' : PDF_Ref, 'Notes' : PDF_Notes},
                                ignore_index = True)
-# Uncomment to save file
-# PDF_info.to_csv('Parsed_files/Stuffed_SiO2_PDF_info.csv')
+save_as = input("Name for CSV output")
+# # Uncomment to save file
+PDF_info.to_csv(os.path.join('Parsed_files', save_as + '.csv'))
