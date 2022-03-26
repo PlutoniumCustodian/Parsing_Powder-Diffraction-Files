@@ -7,12 +7,13 @@ import os
 #%%
 f_name = (os.listdir('File_To_Parse'))#list of files in "file_To-Parse"
 f_howmany = range(len(f_name))
+print(f_name)
 
 #Reads each sheet from the files into dictionary with each sheet becomes a df
 # for x in f_howmany:
 #     df = pd.read_excel(os.path.join('File_To_Parse', f_name[x]), header=None, usecols='A',nrows=27, sheet_name=None)
     
-x = 0 # select index of file you want from 'f_name' list
+x = int(input("Enter index of file to parse")) # select index of file you want from 'f_name' list
 SheetDict = pd.read_excel(os.path.join('File_To_Parse', f_name[x]), header=None,
                    usecols='A',nrows=27, sheet_name=None)
 
@@ -27,11 +28,6 @@ for x in SheetDict.keys():
  
 PDF_info = pd.DataFrame(columns= ['PDF #', 'Name', 'Formula', 'Crystal System',
                                   'Referance', 'Notes' ])
-test = []
-
-# for key, value in SheetDict.items():
-#     s = value[0]
-#     test.append(s)
 
 PDF_Number = []
 PDF_Name = []
@@ -59,4 +55,5 @@ for x in range(len(key_list)):
                                 'Formula' : PDF_Formula, 'Crystal System' : PDF_System,
                                   'Referance' : PDF_Ref, 'Notes' : PDF_Notes},
                                ignore_index = True)
-    
+# Uncomment to save file
+# PDF_info.to_csv('Parsed_files/Stuffed_SiO2_PDF_info.csv')
