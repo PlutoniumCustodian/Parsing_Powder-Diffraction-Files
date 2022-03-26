@@ -22,20 +22,41 @@ key_length = []
 for x in SheetDict.keys():
   key_list.append(x)
 
-  
-PDF_info = pd.DataFrame()
+    
+#%% Put desired data into df
+ 
+PDF_info = pd.DataFrame(columns= ['PDF #', 'Name', 'Formula', 'Crystal System',
+                                  'Referance', 'Notes' ])
 test = []
 
-for key, value in SheetDict.items():
-    s = value[0]
-    test.append(s)
-    
-#%% Test
+# for key, value in SheetDict.items():
+#     s = value[0]
+#     test.append(s)
+
 PDF_Number = []
 PDF_Name = []
 for x in range(len(key_list)):
     Ugg = SheetDict[key_list[x]]
+    
     temp = str(Ugg.loc[0,0])
-    PDF_Number.append(temp[12:24])
+    PDF_Number = temp[12:23]
+    
     temp = str(Ugg.loc[1, 0])
-    PDF_Name.append(temp[6:])
+    PDF_Name = temp[6:]
+    
+    temp = str(Ugg.loc[2, 0])
+    PDF_Formula = temp[9:]
+    
+    temp = str(Ugg.loc[15, 0])
+    PDF_System = temp[16:]
+    
+    temp = str(Ugg.loc[12, 0])
+    PDF_Ref = temp[11:]
+    
+    PDF_Notes = str(Ugg.loc[26, 0])
+    
+    PDF_info = PDF_info.append({'PDF #' : PDF_Number, 'Name' : PDF_Name, 
+                                'Formula' : PDF_Formula, 'Crystal System' : PDF_System,
+                                  'Referance' : PDF_Ref, 'Notes' : PDF_Notes},
+                               ignore_index = True)
+    
