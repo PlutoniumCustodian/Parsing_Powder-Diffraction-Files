@@ -17,7 +17,7 @@ print(pd.DataFrame(f_name, columns=['File Name']))
     
 x = int(input("Enter index of file to parse")) # select index of file you want from 'f_name' list
 SheetDict = pd.read_excel(os.path.join('File_To_Parse', f_name[x]), header=None,
-                   usecols='A',nrows=27, sheet_name=None)
+                   usecols='A',nrows=27, sheet_name=None, dtype=str)
 
 # get list of keys in SheetDict
 key_list = []
@@ -51,7 +51,10 @@ for x in range(len(key_list)):
     temp = str(Ugg.loc[12, 0])
     PDF_Ref = temp[11:]
     
-    PDF_Notes = str(Ugg.loc[26, 0])
+    if Ugg.size >25:
+        PDF_Notes = str(Ugg.loc[26, 0])
+    else:
+        PDF_Notes = "null"
     
     PDF_info = PDF_info.append({'PDF #' : PDF_Number, 'Name' : PDF_Name, 
                                 'Formula' : PDF_Formula, 'Crystal System' : PDF_System,
