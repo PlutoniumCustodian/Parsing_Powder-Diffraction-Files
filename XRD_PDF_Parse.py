@@ -1,7 +1,6 @@
 # This program will parse the information from a powder difraction file (PDF)
 # that has been saved as MS-excell sheet.
 import pandas as pd
-import numpy as np
 import os
 
 #%%
@@ -29,7 +28,7 @@ for x in SheetDict.keys():
 #%% Put desired data into df
  
 PDF_info = pd.DataFrame(columns= ['PDF #', 'Name', 'Formula', 'Crystal System',
-                                  'Referance', 'Notes' ])
+                                  'Referance_1','Referance_2', 'Notes' ])
 
 PDF_Number = []
 PDF_Name = []
@@ -49,7 +48,10 @@ for x in range(len(key_list)):
     PDF_System = temp[16:]
     
     temp = str(Ugg.loc[12, 0])
-    PDF_Ref = temp[11:]
+    PDF_Ref1 = temp[11:]
+    
+    temp = str(Ugg.loc[24, 0])
+    PDF_Ref2 = temp[11:]
     
     if Ugg.size >25:
         PDF_Notes = str(Ugg.loc[26, 0])
@@ -58,7 +60,8 @@ for x in range(len(key_list)):
     
     PDF_info = PDF_info.append({'PDF #' : PDF_Number, 'Name' : PDF_Name, 
                                 'Formula' : PDF_Formula, 'Crystal System' : PDF_System,
-                                  'Referance' : PDF_Ref, 'Notes' : PDF_Notes},
+                                  'Referance_1' : PDF_Ref1,'Referance_2' : PDF_Ref2,
+                                  'Notes' : PDF_Notes},
                                ignore_index = True)
 save_as = input("Name for CSV output")
 # # Uncomment to save file
