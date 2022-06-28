@@ -17,9 +17,9 @@ nanVer = ['#N/A', '#N/A N/A', '#NA', '-1.#IND', '-1.#QNAN', '-NaN', '-nan',
           '1.#IND', '1.#QNAN', '<NA>', 'N/A', 'NA', 'NULL', 'NaN', 'n/a', 'nan', 'null', ' ']
 x = int(input("Enter index of file to parse")) # select index of file you want from 'f_name' list
 SheetDict = pd.read_excel(os.path.join('File_To_Parse', f_name[x]), header=None,
-                   usecols='A',nrows=27, sheet_name=None, dtype=str, skip_blank_lines=False, na_values=nanVer, keep_default_na=False)
+                   usecols='A',nrows=27, sheet_name=None, dtype=str, na_values=nanVer, keep_default_na=False)
+#skip_blank_lines=False
 
-# get list of keys in SheetDict
 key_list = []
 key_length = []
 for x in SheetDict.keys():
